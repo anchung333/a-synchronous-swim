@@ -50,22 +50,20 @@ module.exports.router = (req, res, next = ()=>{}) => {
     console.log("ENTERING POST PARSING");
     callbackNext = true;
 
-    var bufferArray = [];
+    var fileData = Buffer.alloc(0);
     req.on('data', (chunk) => {
-      bufferArray.push(chunk);
+      fileData = Buffer.concat( [fileData, chunk] );
     });
     req.on('end', function () {
-      console.log("BufferArray: ", bufferArray);
-      var buffer= Buffer.concat(bufferArray);
-      var post = multipart.getFile(buffer);
+      var post = multipart.getFile(fileData);
       if (post === null) {
         // it's probably an actual file, not form data
-        post = multipart.parse(buffer);
+        post = multipart.parse(fileData);
       } else {
         // it IS form data, so only send the data property
         post = post['data'];
       }
-      console.log('Buffer (after concat)', buffer);
+      console.log('Buffer (after concat)', fileData);
       console.log('Post (after getFile parsing)', post);
       console.log(post);
       fs.writeFile(module.exports.backgroundImageFile, post, (err) => {
