@@ -1,7 +1,7 @@
 # a-synchronous-swim
 This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
 
-![a-synchronous-swim demo](swim.gif)
+![a-synchronous-swim demo](https://gfycat.com/organicwillingeastsiberianlaika)
 
 ## Technologies
 - JavaScript
